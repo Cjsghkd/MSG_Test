@@ -14,27 +14,25 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    val gitHubApi: GitHubApi,
+    private val gitHubApi: GitHubApi,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
+
+    private val login: String = savedStateHandle["login"]!!
+    private val _uiState = MutableStateFlow<UiState>(UiState.Loading)
+    val uiState = _uiState.asStateFlow()
 
     init {
         getUser()
     }
 
-    val login: String = savedStateHandle["login"]!!
-
-    private val _uiState = MutableStateFlow<UiState>(UiState.Loading)
-    val uiState = _uiState.asStateFlow()
-
-    fun getUser() {
+    private fun getUser() {
         viewModelScope.launch {
             try {
                 _uiState.value = UiState.Success(gitHubApi.getUser(login))
             } catch (e: Exception) {
                 _uiState.value = UiState.Error(e.localizedMessage ?: "알 수 없는 에러")
             }
-            Log.d("user", gitHubApi.getUser(login).toString())
         }
     }
 }

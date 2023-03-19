@@ -1,4 +1,4 @@
-package com.debattle.msg_test.ui
+package com.debattle.msg_test.ui.login
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.BasicTextField
