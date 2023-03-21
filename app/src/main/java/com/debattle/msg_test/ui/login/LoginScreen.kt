@@ -5,6 +5,7 @@ import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -15,16 +16,25 @@ fun LoginScreen(
 ) {
     var login by remember { mutableStateOf("") }
 
-    Row(modifier = Modifier.fillMaxWidth()) {
-        BasicTextField(
-            value = login,
-            onValueChange = {
-                login = it
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.Center
+        ) {
+            BasicTextField(
+                value = login,
+                onValueChange = {
+                    login = it
+                }
+            )
+            Spacer(modifier = Modifier.height(30.dp))
+            Button(onClick = { nevController.navigate("home/$login") }) {
+                Text(text = "로그인")
             }
-        )
-        Spacer(modifier = Modifier.height(30.dp))
-        Button(onClick = { nevController.navigate("home/$login") }) {
-            Text(text = "로그인")
         }
     }
 }

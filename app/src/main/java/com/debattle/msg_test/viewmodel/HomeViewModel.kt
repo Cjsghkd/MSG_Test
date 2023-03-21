@@ -18,7 +18,7 @@ class HomeViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
-    private val login: String = savedStateHandle["login"]!!
+    private val login: String = checkNotNull(savedStateHandle["login"])
     private val _uiState = MutableStateFlow<UiState>(UiState.Loading)
     val uiState = _uiState.asStateFlow()
 

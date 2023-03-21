@@ -45,7 +45,11 @@ fun HomeScreen(
                 }
             }
             is UiState.Success -> {
-                Column(modifier = Modifier.fillMaxSize()) {
+                Column(
+                    modifier = Modifier.fillMaxSize(),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
                     getData(gitHubData = (uiState as UiState.Success).data)
                 }
             }
@@ -55,11 +59,11 @@ fun HomeScreen(
 
 @Composable
 fun getData(gitHubData: GitHubModel) {
-    Text(text = gitHubData.name.toString())
-    Text(text = gitHubData.login.toString())
-    Text(text = gitHubData.id.toString())
+    Text(text = "이름 : " + gitHubData.name.toString())
+    Text(text = "닉네임 : " + gitHubData.login.toString())
+    Text(text = "아이디 : " + gitHubData.id.toString())
     Image(painter = rememberAsyncImagePainter(model = gitHubData.avatarUrl), contentDescription = null)
-    Text(text = gitHubData.bio.toString())
-    Text(text = gitHubData.followers.toString())
-    Text(text = gitHubData.following.toString())
+    Text(text = "한줄 소개 : " + gitHubData.bio.toString())
+    Text(text = "팔로워 수 : " + gitHubData.followers.toString())
+    Text(text = "팔로잉 수 : " + gitHubData.following.toString())
 }
